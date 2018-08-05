@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>Press F12 to see the console</p>
+    <span id="span">Gamepad disconnected</span>
+</body>
+<script>
+var interval;
+if (!('ongamepadconnected' in window)) {
+    interval = setInterval(function pollGamepads() {
+        var gamepad = navigator.getGamepads()[0];
+        if(gamepad) {
+            console.log(gamepad);
+            clearInterval(interval);
+            document.getElementById("span").innerHTML = "Gamepad connected: " + gamepad.id;
+            gameLoop(gamepad);
+        }
+    }, 500);
+}
+
+function gameLoop() {
+    var gamepad = navigator.getGamepads()[0];
+    if(!gamepad) {
+        document.getElementById("span").innerHTML = "Gamepad disconnected";
+        return;
+    }
+    // Analog Axes
+    if (gamepad.axes[0] > 0.3) {        // L RIGHT
+        console.log("axe 0 - " + gamepad.axes[0]);
+    }
+    else if (gamepad.axes[0] < -0.3) {  // L LEFT
+        console.log("axe 0 - " + gamepad.axes[0]);
+    }
+    if (gamepad.axes[1] > 0.3) {        // L DOWN
+        console.log("axe 1 - " + gamepad.axes[1]);
+    }
+    else if (gamepad.axes[1] < -0.3) {  // L UP
+        console.log("axe 1 - " + gamepad.axes[1]);
+    }
+    if (gamepad.axes[2] > 0.3) {        // R LEFT
+        console.log("axe 2 - " + gamepad.axes[2]);
+    }
+    else if (gamepad.axes[2] < -0.3) {  // R RIGHT
+        console.log("axe 2 - " + gamepad.axes[2]);
+    }
+    if (gamepad.axes[3] > 0.3) {        // R DOWN
+        console.log("axe 3 - " + gamepad.axes[3]);
+    }
+    else if (gamepad.axes[3] < -0.3) {  // R UP
+        console.log("axe 3 - " + gamepad.axes[3]);
+    }
+    // Digital Buttons
+    if (gamepad.buttons[0].value > 0.5) {   // A
+        console.log("button 0");
+    }
+    if (gamepad.buttons[1].value > 0.5) {   // B
+        console.log("button 1");
+    }
+    if (gamepad.buttons[2].value > 0.5) {   // X
+        console.log("button 2");
+    }
+    if (gamepad.buttons[3].value > 0.5) {   // Y
+        console.log("button 3");
+    }
+    if (gamepad.buttons[4].value > 0.5) {   // LB
+        console.log("button 4");
+    }
+    if (gamepad.buttons[5].value > 0.5) {   // RB
+        console.log("button 5");
+    }
+    if (gamepad.buttons[8].value > 0.5) {   // BACK
+        console.log("button 8");
+    }
+    if (gamepad.buttons[9].value > 0.5) {   // START
+        console.log("button 9");
+    }
+    if (gamepad.buttons[10].value > 0.5) {  // LEFT STICK
+        console.log("button 10");
+    }
+    if (gamepad.buttons[11].value > 0.5) {  // RIGHT STICK
+        console.log("button 11");
+    }
+    if (gamepad.buttons[12].value > 0.5) {  // UP
+        console.log("button 12");
+    }
+    if (gamepad.buttons[13].value > 0.5) {  // DOWN
+        console.log("button 13");
+    }
+    if (gamepad.buttons[14].value > 0.5) {  // LEFT
+        console.log("button 14");
+    }
+    if (gamepad.buttons[15].value > 0.5) {  // RIGHT
+        console.log("button 15");
+    }
+    // Analog Triggers
+    if (gamepad.buttons[6].value > 0.1) {   // LT
+        console.log("trigger esq - " + gamepad.buttons[6].value);
+    }
+    if (gamepad.buttons[7].value > 0.1) {   // RT
+        console.log("trigger dir - " + gamepad.buttons[7].value);
+    }
+    requestAnimationFrame(gameLoop);
+}
+</script>
+</html>
