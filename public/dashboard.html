@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<body>
+    <div class="panel header">
+        <div>
+            <span class="title size-big">Gamepad: </span>
+            <span id="gamepadStatus" class="info size-big">disconnected</span>
+        </div>
+        <div>
+            <span class="title size-big">Sonar: </span>
+            <span id="sonar" class="info size-big">0cm</span>
+        </div>
+    </div>
+    <div class="panel directions">
+        <span class="title">Car's directions:</span>
+        <p><button onmousedown="moveCar(1)" onmouseup="moveCar(0)">
+            <i class="fas fa-caret-up fa-3x" style="color: white"></i>
+        </button></p>
+        <p><button class="middle-space" onmousedown="moveCar(4)" onmouseup="moveCar(-1)">
+            <i class="fas fa-caret-left fa-3x" style="color: white"></i>
+        </button>
+        <button onmousedown="moveCar(3)" onmouseup="moveCar(-1)">
+            <i class="fas fa-caret-right fa-3x" style="color: white"></i>
+        </button></p>
+        <p><button onmousedown="moveCar(2)" onmouseup="moveCar(0)">
+            <i class="fas fa-caret-down fa-3x" style="color: white"></i>
+        </button></p>
+    </div>
+    <div class="panel">
+        <span class="title">Camera stream:</span>
+        <iframe src="" frameborder="0"></iframe>
+    </div>
+    <div class="buttons">
+        <div class="panel">
+            <span class="title">Stream:</span>
+            <input id="check-stream" type="checkbox" onclick="cameraStream()"></input>
+            <label for="check-stream" class="stream">
+                <i class="fas fa-video fa-2x" style="color: white"></i>
+            </label>
+        </div>
+        <div class="panel">
+            <span class="title">Power:</span>
+            <input id="check-power" type="checkbox" onclick="shutdown()"></input>
+            <label for="check-power" class="power">
+                <i class="fas fa-power-off fa-2x" style="color: white"></i>
+            </label>
+        </div>
+    </div>
+    <div class="panel directions">
+        <span class="title">Arm's rotation and height:</span>
+        <p><button onmousedown="moveArm({value:50,direction:5})">
+            <i class="fas fa-caret-up fa-3x" style="color: white"></i>
+        </button></p>
+        <p><button class="middle-space" onmousedown="moveArm({value:50,direction:4})">
+            <i class="fas fa-caret-left fa-3x" style="color: white"></i>
+        </button>
+        <button onmousedown="moveArm({value:-50,direction:3})">
+            <i class="fas fa-caret-right fa-3x" style="color: white"></i>
+        </button></p>
+        <p><button onmousedown="moveArm({value:-50,direction:6})">
+            <i class="fas fa-caret-down fa-3x" style="color: white"></i>
+        </button></p>
+    </div>
+    <div class="panel directions">
+        <span class="title">Arm's length and claw:</span>
+        <p><button onmousedown="moveArm({value:50,direction:1})">
+            <i class="fas fa-caret-up fa-3x" style="color: white"></i>
+        </button></p>
+        <p><button class="middle-space" onmousedown="moveArm({value:50,direction:8})">
+            <i class="fas fa-caret-left fa-3x" style="color: white"></i>
+        </button>
+        <button onmousedown="moveArm({value:-50,direction:7})">
+            <i class="fas fa-caret-right fa-3x" style="color: white"></i>
+        </button></p>
+        <p><button onmousedown="moveArm({value:-50,direction:2})">
+            <i class="fas fa-caret-down fa-3x" style="color: white"></i>
+        </button></p>
+    </div>
+    <div class="panel">
+        <span class="title">Arm's rotation:</span>
+        <div class="rotation">
+            <img src="angles.png" class="angles">
+            <div id="pointer" class="pointer">
+                <div class="pointer-front"></div>
+                <div class="pointer-back"></div>
+            </div>
+        </div>
+    </div>
+    <div class="panel">
+        <span class="title">Arm's servos:</span>
+        <div class="arm-draw">
+            <img src="arm.png" class="img-arm">
+            <div class="progress-bars">
+                <span class="title size-small">Claw:</span>
+                <div class="bar">
+                    <div id="progressClaw" class="progress"></div>
+                </div>
+                <span class="title size-small">Height:</span>
+                <div class="bar">
+                    <div id="progressHeight" class="progress"></div>
+                </div>
+                <span class="title size-small">Length:</span>
+                <div class="bar">
+                    <div id="progressLength" class="progress"></div>
+                </div>
+                <span class="title size-small">Rotation:</span>
+                <div class="bar">
+                    <div id="progressRotation" class="progress"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="dashboard.js"></script>
+</footer>
+</html>

@@ -1,0 +1,176 @@
+body {
+    display: flex;
+    flex-wrap: wrap; 
+    background-color: rgb(33, 50, 58);
+    font-family: "Arial", Times, Sans-serif;
+}
+
+.panel {
+    padding: 10px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    background-color: rgb(43, 58, 66);
+    box-shadow: 1px 1px 2px #222;
+    width: fit-content;
+    height: fit-content;
+}
+
+.header {
+    height: 20%;
+    width: -webkit-fill-available;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+iframe {
+    width: 320px;
+    height: 240px;
+}
+
+.title {
+    padding: 5px;
+    color: white;
+}
+
+.size-big {
+    font-size: 1.6em;
+}
+
+.size-small {
+    font-size: 0.8em;
+    padding-left: 0;
+}
+
+.info {
+    padding: 5px;
+    color: rgb(147, 72, 171);
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+input:checked + label { 
+    background-color: rgb(147, 72, 171);
+    outline: 0;
+    box-shadow: 1px 1px 2px #222;
+}
+
+.label:active,
+.label:focus  {
+    background-color: rgb(147, 72, 171);
+    outline: 0;
+    box-shadow: 1px 1px 2px #222;
+}
+
+.power {
+    background-color: rgb(48, 63, 70);
+    border: unset;
+    box-shadow: 1px 1px 2px #222;
+    cursor: pointer;
+    padding: 20px;
+}
+
+.stream {
+    background-color: rgb(48, 63, 70);
+    border: unset;
+    box-shadow: 1px 1px 2px #222;
+    cursor: pointer;
+    padding: 20px;
+}
+
+p {
+    margin: 0 auto;
+}
+
+button {
+    background-color: rgb(48, 63, 70);
+    border: unset;
+    box-shadow: 1px 1px 2px #222;
+    width: 65px;
+    height: 65px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+button:active  {
+    background-color: rgb(147, 72, 171);
+    outline: 0;
+    box-shadow: 1px 1px 2px #222;
+}
+
+button:focus  {
+    outline: 0;
+}
+
+.middle-space {
+    margin-right: 75px;
+}
+
+.angles {
+    height: 150px;
+}
+
+.rotation {
+    position: relative;
+}
+
+.pointer {
+    left: 73px;
+    top: 25px;
+    position: absolute;
+    transform: rotate(30deg);
+}
+
+.pointer-front {
+    width: 0; 
+    height: 0; 
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-bottom: 50px solid rgb(147, 72, 171);
+}
+
+.pointer-back {
+    width: 0; 
+    height: 0; 
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 50px solid rgb(70, 197, 220);
+}
+
+.img-arm {
+    filter: invert(100%);
+}
+
+.progress-bars {
+    width: 163px;
+}
+
+.arm-draw {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+}
+
+.bar {
+    margin-bottom: 15px;
+    background: linear-gradient(to right, rgb(70, 197, 220), rgb(147, 72, 171));
+    height: 15px;
+    width: 160px;
+    position: relative;
+}
+
+.progress {
+    background-color: rgb(33, 50, 58);
+    width: 20%;
+    height: 15px;
+    position: absolute;
+    right: 0;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+}
