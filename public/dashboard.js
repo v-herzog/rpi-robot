@@ -184,16 +184,16 @@ function gameLoop() {
         console.log("button 3");
     }
     if (gamepad.buttons[4].value > 0.5) {   // LB
-        moveCar(CAR_BACKWARD);
+      moveCar(CAR_BACKWARD);
     }
     else {
     	moveCar(CAR_MOTOR_OFF);
     }
     if (gamepad.buttons[5].value > 0.5) {   // RB
-        moveCar(CAR_FORWARD);
+      moveCar(CAR_FORWARD);
     }
     else {
-	moveCar(CAR_MOTOR_OFF);
+	    moveCar(CAR_MOTOR_OFF);
     }
     if (gamepad.buttons[8].value > 0.5) {   // BACK
         console.log("button 8");
@@ -221,10 +221,10 @@ function gameLoop() {
     }
     // Analog Triggers
     if (gamepad.buttons[6].value > 0.1) {   // LT
-	moveArm({value: gamepad.buttons[6].value * 30, direction: ARM_OPEN.direction});
+	    moveArm({value: gamepad.buttons[6].value * 30, direction: ARM_OPEN.direction});
     }
     if (gamepad.buttons[7].value > 0.1) {   // RT
-        moveArm({value: gamepad.buttons[7].value * -30, direction: ARM_CLOSE.direction});
+      moveArm({value: gamepad.buttons[7].value * -30, direction: ARM_CLOSE.direction});
     }
     requestAnimationFrame(gameLoop);
 }

@@ -1,0 +1,25 @@
+{
+  "name": "rpi-robot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "webserver.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v-herzog/rpi-robot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v-herzog/rpi-robot/issues"
+  },
+  "homepage": "https://github.com/v-herzog/rpi-robot#readme",
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "express": "^4.16.3",
+    "http": "0.0.0",
+    "socket.io": "^2.1.1"
+  }
+}
