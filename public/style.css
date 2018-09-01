@@ -24,11 +24,6 @@ body {
     justify-content: space-evenly;
 }
 
-iframe {
-    width: 320px;
-    height: 240px;
-}
-
 .title {
     padding: 5px;
     color: white;

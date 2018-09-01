@@ -19,7 +19,7 @@ const ARM_CLOSE = {value: -50, direction: 8};
 var lastCarDirection = 5;
 var socket = io();
 var interval;
-var streamState = true;
+var streamState = false;
 
 socket.on('sonar', function (data) {
   document.getElementById("sonar").innerHTML = data + "cm";
@@ -33,15 +33,20 @@ socket.on('servos', function (data) {
   document.getElementById("pointer").style.transform = `rotate(${String(data.angle)}deg)`;
 });
 
+socket.on("stream-url", function (data) {
+  document.getElementById("stream").src = data;
+  console.log(data);
+})
+
 if (!('ongamepadconnected' in window)) {
-    interval = setInterval(function pollGamepads() {
-        var gamepad = navigator.getGamepads()[0];
-        if(gamepad) {
-            clearInterval(interval);
-            document.getElementById("gamepadStatus").innerHTML = gamepad.id;
-            gameLoop(gamepad);
-        }
-    }, 500);
+  interval = setInterval(function pollGamepads() {
+      var gamepad = navigator.getGamepads()[0];
+      if(gamepad) {
+          clearInterval(interval);
+          document.getElementById("gamepadStatus").innerHTML = gamepad.id.split('(')[0];
+          gameLoop(gamepad);
+      }
+  }, 500);
 }
 
 function moveCar(direction) {
@@ -67,8 +72,8 @@ function moveArm(arm) {
 }
 
 function cameraStream() {
-  socket.emit("stream", streamState);
   streamState = !streamState;
+  socket.emit("stream", streamState);
   document.getElementById("check-stream").checked = streamState;
 }
 
@@ -172,16 +177,16 @@ function gameLoop() {
     }
     // Digital Buttons
     if (gamepad.buttons[0].value > 0.5) {   // A
-        console.log("button 0");
+        console.log("button A");
     }
     if (gamepad.buttons[1].value > 0.5) {   // B
-        console.log("button 1");
+
     }
     if (gamepad.buttons[2].value > 0.5) {   // X
-        console.log("button 2");
+      cameraStream();
     }
     if (gamepad.buttons[3].value > 0.5) {   // Y
-        console.log("button 3");
+      shutdown();
     }
     if (gamepad.buttons[4].value > 0.5) {   // LB
       moveCar(CAR_BACKWARD);
@@ -196,28 +201,28 @@ function gameLoop() {
 	    moveCar(CAR_MOTOR_OFF);
     }
     if (gamepad.buttons[8].value > 0.5) {   // BACK
-        console.log("button 8");
+
     }
     if (gamepad.buttons[9].value > 0.5) {   // START
-        console.log("button 9");
+
     }
     if (gamepad.buttons[10].value > 0.5) {  // LEFT STICK
-        console.log("button 10");
+
     }
     if (gamepad.buttons[11].value > 0.5) {  // RIGHT STICK
-        console.log("button 11");
+
     }
     if (gamepad.buttons[12].value > 0.5) {  // UP
-        console.log("button 12");
+
     }
     if (gamepad.buttons[13].value > 0.5) {  // DOWN
-        console.log("button 13");
+
     }
     if (gamepad.buttons[14].value > 0.5) {  // LEFT
-        console.log("button 14");
+
     }
     if (gamepad.buttons[15].value > 0.5) {  // RIGHT
-        console.log("button 15");
+
     }
     // Analog Triggers
     if (gamepad.buttons[6].value > 0.1) {   // LT

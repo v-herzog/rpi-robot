@@ -4,13 +4,14 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 //var Gpio = require('pigpio').Gpio;
 var process = require('child_process');
+var ip = require('ip');
 
 app.use(express.static(__dirname + '/public'));
 app.get('/', function(req, res, next) {
   res.sendFile(__dirname + '/public/dashboard.html');
 });
 server.listen(5000);
-console.log("Server listening at port 5000");
+console.log(`Server listening at port 5000`);
 
 var LED// = new Gpio(8, {mode: Gpio.OUTPUT});
 var TRIGGER// = new Gpio(18, {mode: Gpio.OUTPUT});
@@ -46,23 +47,23 @@ var startTick;
 
 io.sockets.on('connection', function (socket) {
 
-  ECHO.on('alert', function(level, tick) {
-    var endTick;
-    var diff;
+  // ECHO.on('alert', function(level, tick) {
+  //   var endTick;
+  //   var diff;
 
-    if(level == 1) {
-	  startTick = tick;
-    }
-    else {
-	  endTick = tick;
-	  diff = (endTick >> 0) - (startTick >> 0);
-	  socket.emit("sonar", parseInt(diff / 2 / MICROSECONDS_PER_CM));
-    }
-  });
+  //   if(level == 1) {
+	//   startTick = tick;
+  //   }
+  //   else {
+	//   endTick = tick;
+	//   diff = (endTick >> 0) - (startTick >> 0);
+	//   socket.emit("sonar", parseInt(diff / 2 / MICROSECONDS_PER_CM));
+  //   }
+  // });
 
-  setInterval(function() {
-    TRIGGER.trigger(10, 1)	// Set TRIGGER high for 10 microseconds
-  }, 1000);
+  // setInterval(function() {
+  //   TRIGGER.trigger(10, 1)	// Set TRIGGER high for 10 microseconds
+  // }, 1000);
 
   servosFeedback = function() {
     var data = {
@@ -70,7 +71,7 @@ io.sockets.on('connection', function (socket) {
       height: (heightPulse - 800) / 11,
       length: (lenghtPulse - 500) / 15,
       claw: (clawPulse - 1450) / 11.5,
-      angle: (((rotationPulse - 500) * 150) / 2000) - 60
+      angle: -(((rotationPulse - 500) * 150) / 2000) + 60
     };
     socket.emit('servos', data);
   };
@@ -79,9 +80,11 @@ io.sockets.on('connection', function (socket) {
     if(data) {
       process.exec('LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libv4l/v4l1compat.so motion');
       console.log("STREAM is ON");
+      socket.emit('stream-url', `${ip.address()}:5001`);
     } else {
       process.exec('sudo pkill motion');
       console.log('STREAM is OFF');
+      socket.emit('stream-url', "");
     }
   });
 
