@@ -19,7 +19,6 @@ const ARM_CLOSE = {value: -50, direction: 8};
 var lastCarDirection = 5;
 var socket = io();
 var interval;
-var streamState = false;
 
 socket.on('sonar', function (data) {
   document.getElementById("sonar").innerHTML = data + "cm";
@@ -33,10 +32,7 @@ socket.on('servos', function (data) {
   document.getElementById("pointer").style.transform = `rotate(${String(data.angle)}deg)`;
 });
 
-socket.on("stream-url", function (data) {
-  document.getElementById("stream").src = data;
-  console.log(data);
-})
+document.getElementById("stream").src = `${window.location.hostname}:5001`;
 
 if (!('ongamepadconnected' in window)) {
   interval = setInterval(function pollGamepads() {
@@ -71,10 +67,8 @@ function moveArm(arm) {
   }
 }
 
-function cameraStream() {
-  streamState = !streamState;
-  socket.emit("stream", streamState);
-  document.getElementById("check-stream").checked = streamState;
+function guideLines() {
+  
 }
 
 function shutdown() {
