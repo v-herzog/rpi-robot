@@ -68,12 +68,51 @@ input:checked + label {
     padding: 20px;
 }
 
-.stream {
+.guide {
     background-color: rgb(48, 63, 70);
     border: unset;
     box-shadow: 1px 1px 2px #222;
     cursor: pointer;
     padding: 20px;
+}
+
+.stream-container {
+    position: relative;
+}
+
+.guide-lines {
+    position: absolute;
+    filter: opacity(0.3);
+    left: 30px;
+}
+
+.position-danger {
+    margin-top: -44px;
+    left: 30px;
+    border-bottom: 40px solid red;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+    width: 200px;
+    display: none;
+}
+
+.position-warning {
+    margin-top: -84px;
+    border-bottom: 80px solid yellow;
+    border-left: 60px solid transparent;
+    border-right: 60px solid transparent;
+    width: 140px;
+    display: none;
+}
+
+.position-free {
+    margin-top: -124px;
+    left: 30px;
+    border-bottom: 120px solid green;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    width: 80px;
+    display: none;
 }
 
 p {

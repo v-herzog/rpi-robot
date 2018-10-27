@@ -17,11 +17,24 @@ const ARM_OPEN = {value: 50, direction: 7};
 const ARM_CLOSE = {value: -50, direction: 8};
 
 var lastCarDirection = 5;
+var guide;
 var socket = io();
 var interval;
 
 socket.on('sonar', function (data) {
   document.getElementById("sonar").innerHTML = data + "cm";
+  if(guide) {
+    document.getElementById("position-danger").style.display = "none";
+    document.getElementById("position-warning").style.display = "none";
+    document.getElementById("position-free").style.display = "none";
+
+    if(data <= 5)
+      document.getElementById("position-danger").style.display = "unset";
+    else if(data <= 10)
+      document.getElementById("position-warning").style.display = "unset";
+    else(data <= 15)
+      document.getElementById("position-free").style.display = "unset";
+  }
 });
 
 socket.on('servos', function (data) {
@@ -32,7 +45,7 @@ socket.on('servos', function (data) {
   document.getElementById("pointer").style.transform = `rotate(${String(data.angle)}deg)`;
 });
 
-document.getElementById("stream").src = `${window.location.hostname}:5001`;
+document.getElementById("stream").src = `http://${window.location.hostname}:5001`;
 
 if (!('ongamepadconnected' in window)) {
   interval = setInterval(function pollGamepads() {
@@ -68,7 +81,7 @@ function moveArm(arm) {
 }
 
 function guideLines() {
-  
+  guide = !guide;
 }
 
 function shutdown() {

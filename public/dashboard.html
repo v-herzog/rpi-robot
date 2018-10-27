@@ -36,13 +36,18 @@
     </div>
     <div class="panel">
         <span class="title">Camera stream:</span>
-        <iframe id="stream" frameborder="0" width="320" height="240"></iframe>
+        <div class="stream-container">
+            <img id="stream">
+            <div id="position-danger" class="guide-lines position-danger"></div>
+            <div id="position-warning" class="guide-lines position-warning"></div>
+            <div id="position-free" class="guide-lines position-free"></div>
+        </div>
     </div>
     <div class="buttons">
         <div class="panel">
             <span class="title">Guide:</span>
-            <input id="check-stream" type="checkbox" onclick="guideLines()"></input>
-            <label for="check-stream" class="stream">
+            <input id="check-guide" type="checkbox" onclick="guideLines()"></input>
+            <label for="check-guide" class="guide">
                 <i class="fas fa-wifi fa-2x" style="color: white"></i>
             </label>
         </div>
