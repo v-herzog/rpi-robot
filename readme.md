@@ -2,13 +2,13 @@
 
 This project's goal was to build a robot with a Raspberry Pi controlled by a web interface, it was used a Node.js server running on the Pi inside the robot, so any person who connects to the Pi's IP address can control it using a computer, smartphone, tablet, etc. The web interface supports commands by the buttons in the layout, keyboard and gamepad.
 
-[gif do robô]()
+![robot moving](https://raw.githubusercontent.com/v-herzog/rpi-robot/master/docs/robo.gif)
 
 ## Hardware
 
 I had most of the parts for this project lying around at home, if you plan to build this project I suggest that you adapt some of it, since most stuff are old and/or specific components that are nearly impossible the find for sale these days. So this is much more of a guide for Raspberry Pi's powered robots than a manual for a specific build. Bellow you can see a diagram of all the main parts and sensors with topics of explanation for each individual piece:
 
-[diagram](https://raw.githubusercontent.com/v-herzog/rpi-robot/master/docs/diagram.png)
+![diagram](https://raw.githubusercontent.com/v-herzog/rpi-robot/master/docs/diagram.png)
 
 ### [Raspberry Pi]()
 
@@ -56,7 +56,7 @@ The first thing I did was to look for the serial number online, that didn't gave
 
 ## Software
 
-![dashboard](https://raw.githubusercontent.com/v-herzog/rpi-robot/master/docs/dashboard.png)
+![dashboard](https://raw.githubusercontent.com/v-herzog/rpi-robot/master/docs/dashboard.gif)
 
 To control the robot it was used a [Node.js](https://nodejs.org/en/) with [Socket.io](https://socket.io/docs/) as a server so that any device with browser could connect to it and be a controller, the webpage was designed as a dashboard and shows the data transmitted from the server, in addition to the buttons that control the car and the arm. There are three ways to make the car or the arm move: by clicking on the buttons on the dashboard, by pressing the mapped keyboard keys and with a gamepad connected to the client. Any of these choices will send the command to the server the same way via Socket.io, the server will periodically update the clients with the ultrasonic sensor data and video feed.
 
